@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Registro Cósmico</title>
+    <link rel="stylesheet" href="form-style.css">
+
+    <style>
+        /* ===== GENERO ===== */
+
+        .opciones-genero {
+            display: flex;
+            gap: 15px;
+            margin-top: 8px;
+        }
+
+        .radio-card {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #9d4edd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .radio-card input {
+            display: none;
+        }
+
+        .radio-card:hover {
+            background: rgba(157, 78, 221, 0.2);
+        }
+
+        .radio-card input:checked+span {
+            color: #c77dff;
+            font-weight: bold;
+        }
+
+        .label-extra {
+            margin-top: 20px;
+        }
+
+        .opciones-check {
+            display: flex;
+            gap: 15px;
+            margin-top: 8px;
+        }
+
+        .check-card {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #9d4edd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .check-card input {
+            display: none;
+        }
+
+        .check-card:hover {
+            background: rgba(157, 78, 221, 0.2);
+        }
+
+        .check-card input:checked+span {
+            color: #c77dff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="form-container">
+        <h2>Registro de Perfil 🔮</h2>
+
+        <form action="perfil.php" method="POST">
+
+            <!-- ===== DATOS PERSONALES ===== -->
+            <div class="datos">
+                <h3>Datos Personales</h3>
+
+                <label>Nombre:</label>
+                <input type="text" name="nombre" required>
+
+                <label>Apellido Paterno:</label>
+                <input type="text" name="apellido_p" required>
+
+                <label>Apellido Materno:</label>
+                <input type="text" name="apellido_m" required>
+
+                <label>Nick:</label>
+                <input type="text" name="nick" required>
+
+                <label>Correo:</label>
+                <input type="email" name="correo" required>
+
+                <label>Contraseña:</label>
+                <input type="password" name="password" required>
+            </div>
+
+            <!-- ===== PREFERENCIAS CÓSMICAS ===== -->
+            <div class="datos">
+                <h3>Preferencias Cósmicas</h3>
+
+                <label>Género:</label>
+                <div class="opciones-genero">
+                    <label class="radio-card">
+                        <input type="radio" name="genero" value="mujer" required>
+                        <span>Mujer</span>
+                    </label>
+
+                    <label class="radio-card">
+                        <input type="radio" name="genero" value="hombre" required>
+                        <span>Hombre</span>
+                    </label>
+                </div>
+
+                <label class="label-extra">Páginas donde consulta su horóscopo:</label>
+                <div class="opciones-check">
+                    <label class="check-card">
+                        <input type="checkbox" name="paginas[]" value="Univision">
+                        <span>Univisión</span>
+                    </label>
+
+                    <label class="check-card">
+                        <input type="checkbox" name="paginas[]" value="Horoscopo.eu">
+                        <span>Horoscopo.eu</span>
+                    </label>
+
+                    <label class="check-card">
+                        <input type="checkbox" name="paginas[]" value="ElHoroscopodeHoy.es">
+                        <span>ElHoroscopodeHoy.es</span>
+                    </label>
+                </div>
+
+                <button type="submit">Registrarme ✨</button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>

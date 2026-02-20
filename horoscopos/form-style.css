@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background:
+        linear-gradient(180deg, #000000 0%, #4c1a4f 40%, #0f001a 100%);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.form-container {
+    background: transparent;
+    padding: 35px;
+    border: none;
+    width: 100%;
+    max-width: 1200px;
+}
+
+form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+
+.datos {
+    flex: 1;
+    min-width: 300px;
+    padding: 25px;
+    border-radius: 20px;
+    background: rgba(30, 0, 50, 0.6);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+
+
+
+h2,
+h3 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #ffffff;
+}
+
+label {
+    display: block;
+    margin-top: 12px;
+    font-size: 14px;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 10px;
+    border: 1px solid #9d4edd;
+    background: #000;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border: 1px solid #c77dff;
+    box-shadow: 0 0 10px rgba(199, 125, 255, 0.5);
+}
+
+textarea {
+    resize: none;
+    height: 80px;
+}
+
+button {
+    width: fit-content;
+    margin: 30px auto 0;
+    padding: 12px 25px;
+    border-radius: 25px;
+    border: none;
+    background: #ffffff;
+    color: #000000;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+
+button:hover {
+    background-color: #4c1a4f;
+    color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 900px) {
+    .form-container {
+        max-width: 600px;
+    }
+}

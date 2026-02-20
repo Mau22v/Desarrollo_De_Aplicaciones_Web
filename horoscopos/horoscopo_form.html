@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmos_Test</title>
+    <link rel="stylesheet" href="form-style.css">
+</head>
+
+<body>
+
+    <div class="form-container">
+        <h2>✨ Test Cosmos ✨</h2>
+
+        <form action="resultado_horoscopo.php" method="POST">
+
+            <!-- ================= TUS DATOS ================= -->
+            <div class="datos">
+                <h3>Tus Datos</h3>
+
+                <label for="hora">Hora de nacimiento:</label>
+                <input type="time" id="hora" name="hora" required>
+
+                <label for="dia">Día:</label>
+                <input type="number" id="dia" name="dia" min="1" max="31" required>
+
+                <label for="mes">Mes:</label>
+                <input type="number" id="mes" name="mes" min="1" max="12" required>
+
+                <label for="anio">Año:</label>
+                <input type="number" id="anio" name="anio" required>
+            </div>
+
+            <!-- ================= DATOS PAREJA ================= -->
+            <div class="datos">
+                <h3>Datos de tu pareja</h3>
+
+                <label for="tiene_pareja">¿Tienes pareja?</label>
+                <select id="tiene_pareja" name="tiene_pareja">
+                    <option value="no">No</option>
+                    <option value="si">Sí</option>
+                </select>
+
+                <div id="datos_pareja">
+                    <label for="hora_pareja">Hora pareja:</label>
+                    <input type="time" id="hora_pareja" name="hora_pareja">
+
+                    <label for="dia_pareja">Día pareja:</label>
+                    <input type="number" id="dia_pareja" name="dia_pareja" min="1" max="31">
+
+                    <label for="mes_pareja">Mes pareja:</label>
+                    <input type="number" id="mes_pareja" name="mes_pareja" min="1" max="12">
+
+                    <label for="anio_pareja">Año pareja:</label>
+                    <input type="number" id="anio_pareja" name="anio_pareja">
+                </div>
+            </div>
+
+            <!-- ================= SALUD Y SITUACIÓN ================= -->
+            <div class="datos">
+                <h3>Salud</h3>
+
+                <label for="enfermedades">Enfermedades este año:</label>
+                <textarea id="enfermedades" name="enfermedades"></textarea>
+
+                <label for="finanzas">Situación Financiera:</label>
+                <select name="finanzas">
+                    <option value="buena">Buena</option>
+                    <option value="regular">Regular</option>
+                    <option value="mala">Mala</option>
+                </select>
+
+                <label for="laboral">Situación Laboral:</label>
+                <select name="laboral">
+                    <option value="desempleado">Desempleado</option>
+                    <option value="empleado">Empleado</option>
+                    <option value="empresario">Empresario</option>
+                </select>
+
+                <label for="conexion">Tipo de conexión:</label>
+                <select name="conexion">
+                    <option value="almas">Almas Gemelas</option>
+                    <option value="llamas">Llamas Gemelas</option>
+                </select>
+            </div>
+
+            <button type="submit">Descubrir mi destino</button>
+
+        </form>
+    </div>
+
+</body>
+
+</html>
