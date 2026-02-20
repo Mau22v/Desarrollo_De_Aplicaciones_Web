@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso - Desarrollo de Aplicaciones Web</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Favicon -->
+    <link rel="icon" href="public/favicon.svg" type="image/svg+xml">
+    <link rel="shortcut icon" href="public/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+    <div class="login-page">
+        <canvas id="floatingLinesCanvas"></canvas>
+
+        <div class="login-container">
+            <div class="login-box">
+                <div class="login-header">
+                    <h1>Desarrollo de Aplicaciones Web</h1>
+                </div>
+
+                <div id="loginModal" class="auth-modal" style="display: flex;">
+                    <div class="auth-modal-content">
+                        <div class="auth-modal-header">
+                            <h2>Acceso al Sistema</h2>
+                        </div>
+                        <form id="loginForm" class="auth-form">
+                            <div class="form-group">
+                                <label for="loginEmail">Correo:</label>
+                                <input type="email" id="loginEmail" required placeholder="tu@correo.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="loginPassword">Contraseña:</label>
+                                <input type="password" id="loginPassword" required placeholder="••••••••">
+                                <small class="password-hint">Min 8 caracteres, mayúscula, minúscula, número, especial</small>
+                            </div>
+                            <button type="submit" class="auth-btn">Ingresar</button>
+                            <p class="auth-error" id="loginError" style="display: none;"></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="toastContainer" class="toast-container"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="config.js"></script>
+    <script src="auth.js"></script>
+    <script src="crud.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script type="module">
+      import LiquidBackground from 'https://cdn.jsdelivr.net/npm/threejs-components@0.0.27/build/backgrounds/liquid1.min.js';
+      window.addEventListener('load', () => {
+        window.LiquidBackground = LiquidBackground;
+        window.initLiquidFromHTML?.();
+      });
+    </script>
+    <script>
+        // Esperar a que todos los scripts estén listos
+        window.addEventListener('load', async () => {
+            // Esperar más tiempo para asegurar que auth.js y config.js estén listos
+            let attempts = 0;
+            while (typeof authModule === 'undefined' && attempts < 20) {
+                await new Promise(r => setTimeout(r, 50));
+                attempts++;
+            }
+            
+            if (typeof authModule !== 'undefined') {
+                const isAuth = await authModule.checkAuth();
+                if (isAuth) {
+                    window.location.href = 'page.html';
+                    return;
+                }
+            }
+            
+            initLiquidBackground();
+        });
+
+        // Lógica de login para index.html
+        const loginForm = document.getElementById('loginForm');
+        const toastContainer = document.getElementById('toastContainer');
+
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.textContent = message;
+            toastContainer.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        function initLiquidBackground() {
+            const canvas = document.getElementById('floatingLinesCanvas');
+            const checkLiquidBackground = setInterval(() => {
+                if (typeof window.LiquidBackground !== 'undefined') {
+                    clearInterval(checkLiquidBackground);
+                    try {
+                        const app = window.LiquidBackground(canvas);
+                        app.start();
+                    } catch (e) {
+                        console.error('Error initializing liquid background:', e);
+                    }
+                }
+            }, 100);
+        }
+
+        async function checkAuthStatus() {
+            const isAuth = await authModule.checkAuth();
+            if (isAuth) {
+                window.location.href = 'page.html';
+            }
+        }
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            const result = await authModule.login(email, password);
+            
+            if (result.success) {
+                showToast('¡Bienvenido ' + result.user.nombre + '!', 'success');
+                setTimeout(() => {
+                    window.location.href = 'page.html';
+                }, 1000);
+            } else {
+                document.getElementById('loginError').textContent = result.error;
+                document.getElementById('loginError').style.display = 'block';
+                showToast(result.error, 'error');
+            }
+        });
+
+        document.getElementById('btnCrearCuenta').addEventListener('click', async () => {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            if (!email || !password) {
+                document.getElementById('loginError').textContent = 'Por favor completa email y contraseña';
+                document.getElementById('loginError').style.display = 'block';
+                return;
+            }
+
+            // Validar contraseña
+            const passValidation = authModule.validatePassword(password);
+            if (!passValidation.valid) {
+                document.getElementById('loginError').textContent = passValidation.error;
+                document.getElementById('loginError').style.display = 'block';
+                return;
+            }
+
+            const result = await authModule.createUser(email, password);
+            
+            if (result.success) {
+                document.getElementById('loginError').textContent = '';
+                document.getElementById('loginError').style.display = 'none';
+                if (result.isFirstUser) {
+                    showToast('¡Bienvenido! Administrador del sistema.', 'success');
+                    setTimeout(() => {
+                        window.location.href = 'page.html';
+                    }, 1500);
+                } else {
+                    showToast('Cuenta creada. Por favor inicia sesión.', 'success');
+                    document.getElementById('loginPassword').value = '';
+                }
+            } else {
+                document.getElementById('loginError').textContent = result.error || 'Error al crear la cuenta';
+                document.getElementById('loginError').style.display = 'block';
+                showToast(result.error || 'Error', 'error');
+            }
+        });
+    </script>
+</body>
+</html>
