@@ -103,11 +103,6 @@
 
                 <label>Contraseña:</label>
                 <input type="password" name="password" required>
-            </div>
-
-            <!-- ===== PREFERENCIAS CÓSMICAS ===== -->
-            <div class="datos">
-                <h3>Preferencias Cósmicas</h3>
 
                 <label>Género:</label>
                 <div class="opciones-genero">
@@ -121,6 +116,11 @@
                         <span>Hombre</span>
                     </label>
                 </div>
+            </div>
+
+            <!-- ===== PREFERENCIAS CÓSMICAS ===== -->
+            <div class="datos">
+                <h3>Preferencias Cósmicas</h3>
 
                 <label class="label-extra">Páginas donde consulta su horóscopo:</label>
                 <div class="opciones-check">
@@ -138,7 +138,47 @@
                         <input type="checkbox" name="paginas[]" value="ElHoroscopodeHoy.es">
                         <span>ElHoroscopodeHoy.es</span>
                     </label>
+
                 </div>
+
+                <label class="label-extra">¿Qué tipo de contenido te interesa más?</label>
+                <div class="opciones-check">
+                    <label class="check-card">
+                        <input type="checkbox" name="intereses[]" value="amor">
+                        <span>Amor</span>
+                    </label>
+
+                    <label class="check-card">
+                        <input type="checkbox" name="intereses[]" value="dinero">
+                        <span>Dinero</span>
+                    </label>
+
+                    <label class="check-card">
+                        <input type="checkbox" name="intereses[]" value="espiritual">
+                        <span>Espiritualidad</span>
+                    </label>
+
+                    <label class="check-card">
+                        <input type="checkbox" name="intereses[]" value="destino">
+                        <span> Destino</span>
+                    </label>
+                </div>
+
+                <label class="label-extra">¿Cada cuánto consultas tu horóscopo?</label>
+
+                <select name="frecuencia">
+                    <option value="diario">Diariamente</option>
+                    <option value="semanal">Semanalmente</option>
+                    <option value="ocasional">Solo cuando lo necesito</option>
+                </select>
+
+                <label class="label-extra">¿Qué tan conectado te sientes con lo espiritual?</label>
+
+                <select name="espiritualidad">
+                    <option value="curioso">Solo curiosidad</option>
+                    <option value="creyente">Creo en la astrología</option>
+                    <option value="muy_conectado">Muy conectado espiritualmente</option>
+                </select>
 
                 <button type="submit">Registrarme ✨</button>
 

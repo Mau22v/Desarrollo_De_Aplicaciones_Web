@@ -1,15 +1,26 @@
 <?php
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
+    // ================= DATOS PERSONALES =================
     $nombre = $_POST['nombre'] ?? '';
     $apellido_p = $_POST['apellido_p'] ?? '';
     $apellido_m = $_POST['apellido_m'] ?? '';
     $nick = $_POST['nick'] ?? '';
     $correo = $_POST['correo'] ?? '';
+    $password = $_POST['password'] ?? '';
     $genero = $_POST['genero'] ?? '';
-    $paginas = $_POST['paginas'] ?? [];
 
-    // Definir colores según género
+    // ================= PREFERENCIAS =================
+    $paginas = $_POST['paginas'] ?? [];
+    $intereses = $_POST['intereses'] ?? [];
+    $frecuencia = $_POST['frecuencia'] ?? 'ocasional';
+    $espiritualidad = $_POST['espiritualidad'] ?? 'curioso';
+
+    // (Opcional) Encriptar contraseña 
+    $password_segura = password_hash($password, PASSWORD_DEFAULT);
+
+
+    // ================= ESTILO SEGÚN GÉNERO =================
     if($genero == "hombre"){
         $bgGradient = "linear-gradient(180deg, #000000 0%, #001f3f 40%, #000814 100%)";
         $cardColor = "rgba(0, 20, 40, 0.7)";
@@ -24,9 +35,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $titulo = "Perfil Cósmico Femenino 🌙";
     }
 
+} else {
+    header("Location: index.html");
+    exit();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -112,11 +125,11 @@ button:hover{
     <div class="info"><strong>Género:</strong> <?php echo ucfirst($genero); ?></div>
 
     <div class="paginas">
-        <strong>Páginas donde consulta su horóscopo:</strong><br>
+        <strong>🔮 Páginas donde consulta su horóscopo:</strong><br>
         <?php
         if(!empty($paginas)){
             foreach($paginas as $pagina){
-                echo "✨ " . $pagina . "<br>";
+                echo "✨ $pagina <br>";
             }
         } else {
             echo "No seleccionó ninguna página.";
@@ -124,8 +137,36 @@ button:hover{
         ?>
     </div>
 
-    <button onclick="window.location.href='index.html'">Volver al inicio</button>
-</div>
+    <div class="paginas">
+        <strong>🌌 Intereses cósmicos:</strong><br>
+        <?php
+        if(!empty($intereses)){
+            foreach($intereses as $interes){
+                echo "⭐ " . ucfirst($interes) . "<br>";
+            }
+        } else {
+            echo "No seleccionó intereses.";
+        }
+        ?>
+    </div>
 
+    <div class="info">
+        <strong>Frecuencia de consulta:</strong>
+        <?php echo ucfirst($frecuencia); ?>
+    </div>
+
+    <div class="info">
+        <strong>Nivel espiritual:</strong>
+        <?php
+            if($espiritualidad == "curioso") echo "Curiosidad espiritual";
+            elseif($espiritualidad == "creyente") echo "Cree en la astrología";
+            else echo "Muy conectado espiritualmente";
+        ?>
+    </div>
+
+    <button onclick="window.location.href='index.html'">
+        Volver al inicio
+    </button>
+</div>
 </body>
 </html>

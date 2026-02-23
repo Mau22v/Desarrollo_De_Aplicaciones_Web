@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cosmos_Test</title>
+    <title>Cosmos Test</title>
     <link rel="stylesheet" href="form-style.css">
 </head>
 
@@ -13,82 +13,176 @@
     <div class="form-container">
         <h2>✨ Test Cosmos ✨</h2>
 
+        <!-- ================= MODO ================= -->
+        <div class="mod-container">
+            <h3>🔮 ¿Qué deseas descubrir? 🔮</h3>
+
+            <select name="modo" id="modo">
+                <option value="personal">Mi predicción personal</option>
+                <option value="compatibilidad">Compatibilidad amorosa</option>
+            </select>
+        </div>
+
         <form action="resultado_horoscopo.php" method="POST">
 
-            <!-- ================= TUS DATOS ================= -->
+
+            <!-- ================= USUARIO ================= -->
             <div class="datos">
-                <h3>Tus Datos</h3>
+                <h3>🌌 Tus Datos</h3>
 
-                <label for="hora">Hora de nacimiento:</label>
-                <input type="time" id="hora" name="hora" required>
+                <label>Nombre:</label>
+                <input type="text" name="nombre" required>
 
-                <label for="dia">Día:</label>
-                <input type="number" id="dia" name="dia" min="1" max="31" required>
+                <label>Hora de nacimiento:</label>
+                <input type="time" name="hora" required>
 
-                <label for="mes">Mes:</label>
-                <input type="number" id="mes" name="mes" min="1" max="12" required>
+                <label>Día:</label>
+                <input type="number" name="dia" min="1" max="31" required>
 
-                <label for="anio">Año:</label>
-                <input type="number" id="anio" name="anio" required>
-            </div>
+                <label>Mes:</label>
+                <input type="number" name="mes" min="1" max="12" required>
 
-            <!-- ================= DATOS PAREJA ================= -->
-            <div class="datos">
-                <h3>Datos de tu pareja</h3>
+                <label>Año:</label>
+                <input type="number" name="anio" required>
 
-                <label for="tiene_pareja">¿Tienes pareja?</label>
-                <select id="tiene_pareja" name="tiene_pareja">
-                    <option value="no">No</option>
-                    <option value="si">Sí</option>
+                <label>¿Cómo te sientes últimamente?</label>
+                <select name="emocion">
+                    <option value="feliz">En paz</option>
+                    <option value="confundido">Confundido</option>
+                    <option value="estresado">Estresado</option>
+                    <option value="motivado">Motivado</option>
                 </select>
-
-                <div id="datos_pareja">
-                    <label for="hora_pareja">Hora pareja:</label>
-                    <input type="time" id="hora_pareja" name="hora_pareja">
-
-                    <label for="dia_pareja">Día pareja:</label>
-                    <input type="number" id="dia_pareja" name="dia_pareja" min="1" max="31">
-
-                    <label for="mes_pareja">Mes pareja:</label>
-                    <input type="number" id="mes_pareja" name="mes_pareja" min="1" max="12">
-
-                    <label for="anio_pareja">Año pareja:</label>
-                    <input type="number" id="anio_pareja" name="anio_pareja">
-                </div>
             </div>
 
-            <!-- ================= SALUD Y SITUACIÓN ================= -->
-            <div class="datos">
-                <h3>Salud</h3>
 
-                <label for="enfermedades">Enfermedades este año:</label>
-                <textarea id="enfermedades" name="enfermedades"></textarea>
+            <!-- ================= PAREJA ================= -->
+            <div class="datos" id="contenedor_pareja" style="display:none;">
+                <h3>❤️ Datos de tu Crush / Pareja</h3>
 
-                <label for="finanzas">Situación Financiera:</label>
+                <label>Nombre:</label>
+                <input type="text" name="nombre_pareja">
+
+                <label>Hora nacimiento:</label>
+                <input type="time" name="hora_pareja">
+
+                <label>Día:</label>
+                <input type="number" name="dia_pareja" min="1" max="31">
+
+                <label>Mes:</label>
+                <input type="number" name="mes_pareja" min="1" max="12">
+
+                <label>Año:</label>
+                <input type="number" name="anio_pareja">
+            </div>
+
+
+            <!-- ================= CONTEXTO PERSONAL ================= -->
+            <div class="datos" id="contenedor_contexto" style="display:none;">
+                <h3>🌱 Situación Actual</h3>
+
+                <label>Salud (algo relevante este año):</label>
+                <textarea name="enfermedades"></textarea>
+
+                <label>Situación Financiera:</label>
                 <select name="finanzas">
                     <option value="buena">Buena</option>
                     <option value="regular">Regular</option>
                     <option value="mala">Mala</option>
                 </select>
 
-                <label for="laboral">Situación Laboral:</label>
+                <label>Situación Laboral:</label>
                 <select name="laboral">
                     <option value="desempleado">Desempleado</option>
                     <option value="empleado">Empleado</option>
                     <option value="empresario">Empresario</option>
                 </select>
 
-                <label for="conexion">Tipo de conexión:</label>
+                <label>Tipo de conexión deseada:</label>
                 <select name="conexion">
+                    <option value="ninguna">Solo predicción</option>
                     <option value="almas">Almas Gemelas</option>
                     <option value="llamas">Llamas Gemelas</option>
                 </select>
             </div>
 
-            <button type="submit">Descubrir mi destino</button>
+            <!-- ================= PERFIL PERSONAL ================= -->
+            <div class="datos">
+                <h3>🌙 Perfil Personal</h3>
+
+                <label>¿Cómo describirías tu personalidad?</label>
+                <select name="personalidad">
+                    <option value="introvertido">Introvertido</option>
+                    <option value="equilibrado">Equilibrado</option>
+                    <option value="extrovertido">Extrovertido</option>
+                </select>
+
+                <label>¿Qué buscas actualmente?</label>
+                <select name="busqueda">
+                    <option value="amor">Amor</option>
+                    <option value="estabilidad">Estabilidad</option>
+                    <option value="crecimiento">Crecimiento personal</option>
+                    <option value="dinero">Éxito financiero</option>
+                </select>
+
+                <label>Nivel de estrés actual:</label>
+                <select name="estres">
+                    <option value="bajo">Bajo</option>
+                    <option value="medio">Medio</option>
+                    <option value="alto">Alto</option>
+                </select>
+
+                <label>¿Sigues tu intuición?</label>
+                <select name="intuicion">
+                    <option value="siempre">Siempre</option>
+                    <option value="a_veces">A veces</option>
+                    <option value="casi_nunca">Casi nunca</option>
+                </select>
+
+                <label>Elemento con el que más te identificas:</label>
+                <select name="elemento">
+                    <option value="fuego">🔥 Fuego</option>
+                    <option value="agua">💧 Agua</option>
+                    <option value="aire">🌬 Aire</option>
+                    <option value="tierra">🌱 Tierra</option>
+                </select>
+
+            </div>
+
+            <button type="submit">✨ Descubrir mi destino ✨</button>
 
         </form>
     </div>
+
+
+    <script>
+        const modo = document.getElementById("modo");
+        const pareja = document.getElementById("contenedor_pareja");
+        const contexto = document.getElementById("contenedor_contexto");
+
+        function actualizarFormulario() {
+
+            if (modo.value === "compatibilidad") {
+                // Mostrar pareja
+                pareja.style.display = "block";
+
+                // Ocultar situación actual
+                contexto.style.display = "none";
+
+            } else {
+                // Ocultar pareja
+                pareja.style.display = "none";
+
+                // Mostrar situación actual
+                contexto.style.display = "block";
+            }
+        }
+
+        // Ejecutar al cambiar
+        modo.addEventListener("change", actualizarFormulario);
+
+        // Ejecutar al cargar la página (IMPORTANTE)
+        actualizarFormulario();
+    </script>
 
 </body>
 
